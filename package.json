@@ -1,0 +1,22 @@
+{
+  "name": "2121_m02_uf4",
+  "version": "1.0.0",
+  "description": "Proyecto base de datos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skarrierr/2121_M02_UF4.git"
+  },
+  "author": "hander",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/skarrierr/2121_M02_UF4/issues"
+  },
+  "homepage": "https://github.com/skarrierr/2121_M02_UF4#readme",
+  "dependencies": {
+    "mongodb": "^4.3.1"
+  }
+}
