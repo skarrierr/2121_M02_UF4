@@ -6,28 +6,95 @@
 <body>
 <h1>Too Fast Family HD: Web Edition</h1>
 <main>
+
 <section id="characters">
-	<ul id="characters-list">
-	</ul>
+<h2>Characters</h2>
+<ul id="characters-list">
+</ul>
+</section>
+
+<section id="Items">
+<h2>Items</h2>
+<ul id="Items-list">
+</ul>
+</section>
+
+<section id="weapons">
+<h2>Weapons</h2>
+<ul id="weapons-list">
+</ul>
 </section>
 </main>
 
 <script>
 
-function write_characters_list (data){
+load_data_items();
+load_data_characters();
+load_data_weapons();
+function load_data_items()
+{
+	fetch("/Items")
+			.then(response => response.json())
+			.then(data => write_Items_list(data));
+
+}
+
+
+function write_Items_list(data)
+{
+	let list = "";
+	for (let i = 0; i < data.length; i++){
+		list += "<li> <a href=\"Items/"+data[i]._id+"\">" + data[i].item + "  " +"</a><a href=\"remove/" + data[i]._id + "/Items" + "\" >X</a></li>" ;
+	}
+	document.getElementById("Items-list").innerHTML = list;
+
+};
+function write_characters_list(data){
 
 	let list = "";
 	for	(let i = 0; i < data.length; i++){
 		
-		list+= "<li>"+data[i].name+"</li>"; 
+	 list += "<li> <a href=\"characters/"+data[i]._id+"\">" + data[i].name + "  " +"</a><a href=\"remove/" + data[i]._id + "/characters" + "\" >X</a></li>" ;
+	 
 	}
 	document.getElementById("characters-list").innerHTML = list;
-}
-let character_interval = setInterval (function(){
-fetch("/characters").then((response) => response.json())
-					.then(data => write_characters_list(data));
+};
 
-},2000;
+
+
+
+ function write_weapons_list(data){
+ 	let list = "";
+ 	for (let i = 0; i < data.length; i++){
+ 		list += "<li> <a href=\"weapons/"+data[i]._id+"\">" + data[i].weapon + "  " +"</a><a href=\"remove/" + data[i]._id + "/weapons" + "\" >X</a></li>" ;
+	}   
+	 document.getElementById("weapons-list").innerHTML = list;
+	 
+ };
+
+function load_data_characters()
+{
+	fetch("/characters")
+			.then(response => response.json())
+			.then(data => write_characters_list(data));
+
+}
+
+ function load_data_weapons(){
+	fetch("/weapons")
+		.then(response => response.json())
+		.then(data => write_weapons_list(data));
+ }
+
+
+let weaponsInterval = serInterval(load_data_weapons("weapons"),2000);
+
+let charactersInterval = setInterval(load_data_characters("characters"),2000);
+
+let ItemsInterval = setInterval(load_data_items("Items"),2000);
+
+
+
 
 </script>
 
